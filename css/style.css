@@ -1,0 +1,1045 @@
+/* --- Header Glassmorphism --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--header-height);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* 1. A Logo empurra tudo para a direita */
+.logo {
+    align-items: center;
+}
+
+.logo-img {
+    height: 27px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+#main-header .logo {
+    margin-right: auto;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.icon-logo {
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+/* 2. Menu alinhado à direita (perto do botão) */
+#nav-menu {
+    margin-right: 40px;
+}
+
+#nav-menu ul {
+    display: flex;
+    gap: 32px; }
+
+#nav-menu a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+#nav-menu a:hover, #nav-menu a.active {
+    color: var(--text-main);
+}
+
+/* Efeito sublinhado (mantido) */
+#nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--primary);
+    transition: 0.3s ease;
+}
+#nav-menu a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display:flex;
+    align-items: center;
+}
+
+/* 3. Botão Discreto (Estilo Ghost/Glass) */
+.btn-glow {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+/* Estado Hover: Acende e chama atenção */
+.btn-glow:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 20px var(--primary-glow);
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* --- Hero Section --- */
+#hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: var(--header-height);
+}
+
+.hero-slideshow {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.hero-slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform-origin: center center;
+    animation: ken-burns-loop 36s infinite;
+}
+
+hero-slideshow img:nth-child(1) {
+    animation-delay: 0s;
+}
+
+/* Imagem 2: Começa aos 12s (1/3 de 36s) */
+.hero-slideshow img:nth-child(2) {
+    animation-delay: 12s;
+}
+
+/* Imagem 3: Começa aos 24s (2/3 de 36s) */
+.hero-slideshow img:nth-child(3) {
+    animation-delay: 24s;
+}
+
+/* MUDANÇA 2: Overlay Mais Escuro */
+.gradient-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.95) 100%);
+    background-size: 150% 150%;
+    animation: spotlight-move 25s infinite alternate ease-in-out;
+    z-index: 1;
+}
+
+/* Animação Ken Burns (Mantida igual, apenas o tempo total mudou acima) */
+@keyframes ken-burns-loop {
+    0% { opacity: 0; transform: scale(1); }
+    4% { opacity: 1; }
+    33% { opacity: 1; }
+    38% { opacity: 0; transform: scale(1.15); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text { max-width: 650px; }
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    padding-bottom: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    color: var(--primary);
+}
+
+#hero h1 {
+    font-size: 4.5rem;
+    margin-bottom: 24px;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+#hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.hero-btns { display: flex; gap: 16px; }
+
+.btn-primary {
+    background: var(--text-main);
+    color: var(--bg-body);
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.btn-outline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-outline:hover {
+    border-color: var(--text-main);
+    background: rgba(255,255,255,0.05);
+}
+
+/* Card Flutuante no Hero */
+.hero-floating-card {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255,255,255,0.1);
+    min-width: 300px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.15);
+    color: var(--primary);
+    border: 1px solid transparent;
+    transition: all 0.4s ease;
+}
+
+.stat-icon span {
+    font-size: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stat-item:hover .stat-icon {
+    background: transparent;
+}
+
+.stat-item:hover .stat-icon span {
+    transform: scale(1.4);
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-item .material-symbols-rounded {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.stat-item span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* --- Serviços (Bento Grid) --- */
+.section-header {
+    margin-bottom:
+    60px;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.grid-card {
+    background: var(--bg-surface);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.03);
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.grid-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(160deg, var(--bg-surface) 0%, #1a1512 100%);
+    border: 1px solid var(--primary-glow);
+}
+
+.grid-card:hover {
+    background: var(--bg-surface-hover);
+    transform: translateY(-5px);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 24px;
+}
+
+.grid-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.grid-card p {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.tags { 
+    margin-top: auto; 
+    padding-top: 20px; 
+    display: flex; 
+    gap: 10px; 
+    flex-wrap: wrap;
+}
+
+.tags span {
+    font-size: 0.75rem;
+    background: rgba(255,255,255,0.1);
+    padding: 6px 12px; /* Ajustei levemente o padding */
+    border-radius: 20px;
+    
+    /* Alinhamento Ícone + Texto */
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; /* Espaço entre o ícone e a palavra */
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.tags span i {
+    font-size: 0.9rem;
+    color: var(--primary); /* O ícone fica Laranja (Cobre) */
+}
+
+.grid-card:hover .tags span {
+    background: rgba(101, 101, 101, 0.1);
+    border-color: rgba(15, 15, 15, 0.3);
+    color: var(--text-main);
+}
+
+/* --- Método NOTAR (Otimizado) --- */
+.bg-darker {
+    background: #050505;
+}
+
+.row { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 60px; 
+}
+
+.col-text {
+    flex: 1;
+}
+
+.col-img {
+    flex: 1;
+}
+
+.subtitle {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+/* Lista de Passos */
+.steps-list {
+    margin-top: 40px;
+}
+
+.steps-list li {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 25px;
+    opacity: 0.4;
+    transition: 0.3s ease;
+    cursor: default;
+}
+
+.steps-list li:hover, .steps-list li.active { 
+    opacity: 1; 
+    transform: translateX(10px);
+}
+
+/* Letras (N, O, T, A, R) */
+.step-letter {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--primary);
+    font-weight: 700;
+    min-width: 50px;
+}
+
+.steps-list li:hover .step-letter, 
+.steps-list li.active .step-letter {
+    color: var(--primary);
+    -webkit-text-stroke: 0;
+    text-shadow: 0 0 20px var(--primary-glow);
+}
+
+.step-info h4 {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.step-info p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Imagem e Badge */
+.sticky-img {
+    position: sticky;
+    top: 120px;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    transition: 0.5s; }
+
+.image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.floating-badge {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Secção Estratégia --- */
+.center-text {
+    text-align: center;
+}
+
+.center-text p {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.strategy-card {
+    background: var(--bg-surface);
+    padding: 40px 30px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+}
+
+/* Efeito de Brilho de Fundo (Glow) */
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.strategy-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover Effects */
+.strategy-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.strategy-card:hover .card-glow {
+    opacity: 0.15;
+    transform: scale(1);
+}
+
+.strategy-icon {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.strategy-card:hover .strategy-icon {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.strategy-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.strategy-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* --- Secção de Posicionamento (Authority Wall) --- */
+#posicionamento {
+    background-color: #080808; /* Um preto ainda mais profundo */
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pos-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* Coluna de Texto */
+.badge-alert {
+    display: inline-block;
+    padding: 6px 16px;
+    padding-bottom: 5px;
+    background: rgba(255, 60, 60, 0.15);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 60, 60, 0.3);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+
+#posicionamento h2 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.impact-p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--primary);
+    padding-left: 20px;
+}
+
+.impact-p strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: gap 0.3s;
+}
+
+.link-arrow:hover {
+    gap: 15px;
+}
+
+/* Grid de Expertise (Lado Direito) */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.expert-card {
+    display: flex;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.expert-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    transform: translateX(10px);
+}
+
+.expert-icon {
+    min-width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.expert-card:hover .expert-icon {
+    background: var(--primary);
+    color: white;
+}
+
+.expert-card h4 {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.expert-card p {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.5;
+}
+
+/* --- CTA Final (Versão Agressiva & Premium) --- */
+#cta-final {
+    position: relative;
+    padding: 140px 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.cta-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.cta-bg img.animate-bg {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.4);
+    animation: pan-zoom 40s infinite alternate linear;
+}
+
+.cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.6) 100%);
+}
+
+/* A Caixa de Conteúdo */
+.cta-wrapper {
+    max-width: 800px;
+}
+
+.cta-content-box {
+    position: relative;
+    z-index: 2;
+}
+
+/* Tag de Exclusividade */
+.cta-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+}
+
+/* Título */
+#cta-final h2 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.cta-desc {
+    font-size: 1.2rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 90%;
+}
+
+/* Checklist de Valor */
+.cta-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.cta-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+.cta-checklist i {
+    color: var(--primary);
+    font-size: 1.3rem;
+}
+
+/* Linha de Ação */
+.cta-action-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* Botão CTA Grande e Pulsante */
+.btn-cta-pulse-large {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 20px 48px;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(56, 56, 56, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.btn-cta-pulse-large::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( 90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100% );
+    transform: skewX(-25deg);
+    animation: shine-loop 3s infinite;
+    z-index: -1;
+}
+
+/* A definição do movimento do brilho */
+@keyframes shine-loop {
+    0% {
+        left: -150%; /* Início: fora na esquerda */
+    }
+    40% {
+        left: 150%; /* Meio: passa rapidamente para a direita */
+    }
+    100% {
+        left: 150%; /* Fim: fica parado na direita (pausa dramática) antes de recomeçar */
+    }
+}
+
+/* Hover: O botão sobe e o brilho fica mais intenso */
+.btn-cta-pulse-large:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(220, 220, 220, 0.4);
+}
+
+/* Opcional: Acelerar o brilho no hover */
+.btn-cta-pulse-large:hover::after {
+    animation-duration: 2s;
+}
+
+/* Obs final */
+.cta-obs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.cta-obs i { 
+    color: #888;
+}
+
+/* --- Footer Profissional --- */
+#main-footer {
+    background-color: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 0 30px;
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 0.8fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: start; 
+}
+
+.footer-col h4 {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    margin-top: 0; 
+    line-height: 1.2;
+}
+
+.brand-col .logo { 
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.brand-col .logo-img {
+    height: 35px;
+    margin-bottom: 1rem;
+}
+
+.footer-desc {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+/* Botões Sociais */
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.social-btn:hover {
+    background: var(--primary);
+    color: var(--color-1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--primary-glow);
+}
+
+/* Links do Menu */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+/* Informações de Contato */
+.contact-info li {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+}
+
+.contact-info i {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0;
+}
+
+.contact-info span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.contact-info a, .contact-info p {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.contact-info a:hover {
+    color: var(--primary);
+}
+
+/* Rodapé Inferior (Copyright) */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-bottom-links a:hover {
+    text-decoration: underline;
+}
