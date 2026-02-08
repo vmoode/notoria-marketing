@@ -3,7 +3,11 @@
     --header-blur: 12px;
     --header-border: rgba(255, 255, 255, 0.05);
     --nav-gap: 32px;
+    --bg-btn-glow: rgba(255, 255, 255, 0.05);
     
+    --bg-badge: rgba(255, 255, 255, 0.1);
+    --border-color-1: rgba(255, 255, 255, 0.3);
+    --bg-tags: rgba(255,255,255,0.1);
     --color-1: #ffffff;
     --bg-body: #0a0a0a;
     --bg-surface: #141414;
@@ -12,6 +16,7 @@
     --primary-glow: rgba(111, 93, 87, 0.4);
     --text-main: #FFFFFF;
     --text-muted: #A0A0A0;
+    --bg-footer: #050505;
     --gradient-brand: linear-gradient(135deg, #b0a388 0%, #6c4e32 100%);
     /* Fontes */
     --font-display: 'Space Grotesk', sans-serif;

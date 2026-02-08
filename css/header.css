@@ -1,4 +1,3 @@
-/* --- Header Glassmorphism --- */
 #main-header {
     position: fixed;
     top: 0;
@@ -6,9 +5,9 @@
     width: 100%;
     z-index: 1000;
     height: var(--header-height);
-    background: rgba(10, 10, 10, 0.7);
+    background: var(--header-bg);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--header-border);
 }
 
 .header-container {
@@ -17,7 +16,6 @@
     height: 100%;
 }
 
-/* 1. A Logo empurra tudo para a direita */
 .logo {
     align-items: center;
 }
@@ -43,7 +41,6 @@
     font-size: 1.8rem;
 }
 
-/* 2. Menu alinhado à direita (perto do botão) */
 #nav-menu {
     margin-right: 40px;
 }
@@ -64,7 +61,6 @@
     color: var(--text-main);
 }
 
-/* Efeito sublinhado (mantido) */
 #nav-menu a::after {
     content: '';
     position: absolute;
@@ -84,13 +80,12 @@
     align-items: center;
 }
 
-/* 3. Botão Discreto (Estilo Ghost/Glass) */
 .btn-glow {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-btn-glow);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: var(--text-main);
     padding: 10px 24px;
-    border-radius: 50px;
+    border-radius: 999px;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -100,18 +95,17 @@
     box-shadow: none;
 }
 
-/* Estado Hover: Acende e chama atenção */
 .btn-glow:hover {
     background: var(--primary);
     border-color: var(--primary);
-    color: white;
+    color: var(--color-1);
     box-shadow: 0 0 20px var(--primary-glow);
     transform: translateY(-2px);
 }
 
 .menu-toggle {
     display: none;
-    color: white;
+    color: var(--color-1);
     cursor: pointer;
 }
 
@@ -136,7 +130,6 @@
         transition: color 0.3s ease;
     }
 
-    /* Estado Ativo (X Giratório) */
     .menu-toggle.active {
         transform: rotate(90deg);
     }
@@ -145,7 +138,6 @@
         color: var(--primary);
     }
 
-    /* --- O Menu Popover (Full Screen) --- */
     #nav-menu {
         position: fixed;
         top: 0;
@@ -190,7 +182,6 @@
         transition: 0.3s;
     }
 
-    /* Animação Cascata */
     #nav-menu.active a {
         opacity: 1;
         transform: translateY(0);
@@ -207,7 +198,6 @@
         transform: scale(1.1);
     }
 
-        /* Esconder botão desktop */
     .btn-glow {
         display: none;
     }
