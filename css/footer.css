@@ -1,0 +1,183 @@
+/* --- Footer Profissional --- */
+#main-footer {
+    background-color: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 0 30px;
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 0.8fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: start; 
+}
+
+.footer-col h4 {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    margin-top: 0; 
+    line-height: 1.2;
+}
+
+.brand-col .logo { 
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.brand-col .logo-img {
+    height: 35px;
+    margin-bottom: 1rem;
+}
+
+.footer-desc {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+/* Botões Sociais */
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.social-btn:hover {
+    background: var(--primary);
+    color: var(--color-1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--primary-glow);
+}
+
+/* Links do Menu */
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+/* Informações de Contato */
+.contact-info li {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+}
+
+.contact-info i {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0;
+}
+
+.contact-info span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.contact-info a, .contact-info p {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.contact-info a:hover {
+    color: var(--primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-bottom-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .footer-col:nth-child(2),
+    .footer-col:nth-child(3) {
+        grid-column: span 1; 
+    }
+    
+    .brand-col {
+        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-desc {
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .hero-floating-card {
+        display: none;
+    }
+
+    #hero p {
+        align-items: center;
+    }
+
+    .logo-img {
+        height: 35px;
+    }
+
+    .brand-col .logo-img {
+        height: 45px;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+}

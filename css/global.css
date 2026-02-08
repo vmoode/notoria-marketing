@@ -1,4 +1,9 @@
 :root {
+    --header-bg: rgba(10, 10, 10, 0.7);
+    --header-blur: 12px;
+    --header-border: rgba(255, 255, 255, 0.05);
+    --nav-gap: 32px;
+    
     --color-1: #ffffff;
     --bg-body: #0a0a0a;
     --bg-surface: #141414;

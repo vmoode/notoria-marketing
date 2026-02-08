@@ -1,120 +1,3 @@
-/* --- Header Glassmorphism --- */
-#main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    height: var(--header-height);
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-/* 1. A Logo empurra tudo para a direita */
-.logo {
-    align-items: center;
-}
-
-.logo-img {
-    height: 27px;
-    width: auto;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-#main-header .logo {
-    margin-right: auto;
-}
-
-.logo h1 {
-    font-size: 1.5rem;
-    letter-spacing: -1px;
-}
-
-.icon-logo {
-    color: var(--primary);
-    font-size: 1.8rem;
-}
-
-/* 2. Menu alinhado à direita (perto do botão) */
-#nav-menu {
-    margin-right: 40px;
-}
-
-#nav-menu ul {
-    display: flex;
-    gap: 32px; }
-
-#nav-menu a {
-    color: var(--text-muted);
-    font-weight: 500;
-    font-size: 0.95rem;
-    position: relative;
-    transition: color 0.3s;
-}
-
-#nav-menu a:hover, #nav-menu a.active {
-    color: var(--text-main);
-}
-
-/* Efeito sublinhado (mantido) */
-#nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: var(--primary);
-    transition: 0.3s ease;
-}
-#nav-menu a:hover::after {
-    width: 100%;
-}
-
-.header-actions {
-    display:flex;
-    align-items: center;
-}
-
-/* 3. Botão Discreto (Estilo Ghost/Glass) */
-.btn-glow {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-main);
-    padding: 10px 24px;
-    border-radius: 50px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: none;
-}
-
-/* Estado Hover: Acende e chama atenção */
-.btn-glow:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-    box-shadow: 0 0 20px var(--primary-glow);
-    transform: translateY(-2px);
-}
-
-.menu-toggle {
-    display: none;
-    color: white;
-    cursor: pointer;
-}
-
 /* --- Hero Section --- */
 #hero {
     position: relative;
@@ -189,6 +72,7 @@ hero-slideshow img:nth-child(1) {
 
 .hero-text { max-width: 650px; }
 
+/* --- Badge padrão --- */
 .badge {
     display: inline-block;
     padding: 6px 16px;
@@ -203,6 +87,79 @@ hero-slideshow img:nth-child(1) {
     margin-bottom: 24px;
     color: var(--primary);
 }
+
+.badge-alert {
+    display: inline-block;
+    padding: 6px 16px;
+    padding-bottom: 5px;
+    background: rgba(255, 60, 60, 0.15);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 60, 60, 0.3);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+/*-------------*/
+
+/* --- Botão CTA ---*/
+.btn-cta-pulse-large {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 20px 48px;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(56, 56, 56, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.btn-cta-pulse-large::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( 90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100% );
+    transform: skewX(-25deg);
+    animation: shine-loop 3s infinite;
+    z-index: -1;
+}
+
+@keyframes shine-loop {
+    0% {
+        left: -150%;
+    }
+    40% {
+        left: 150%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+
+.btn-cta-pulse-large:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(220, 220, 220, 0.4);
+}
+
+.btn-cta-pulse-large:hover::after {
+    animation-duration: 2s;
+}
+/*-------------*/
 
 #hero h1 {
     font-size: 4.5rem;
@@ -489,7 +446,6 @@ hero-slideshow img:nth-child(1) {
     line-height: 1.5;
 }
 
-/* Imagem e Badge */
 .sticky-img {
     position: sticky;
     top: 120px;
@@ -574,7 +530,6 @@ hero-slideshow img:nth-child(1) {
     z-index: 1;
 }
 
-/* Hover Effects */
 .strategy-card:hover {
     transform: translateY(-10px);
     border-color: var(--primary);
@@ -612,7 +567,7 @@ hero-slideshow img:nth-child(1) {
 
 /* --- Secção de Posicionamento (Authority Wall) --- */
 #posicionamento {
-    background-color: #080808; /* Um preto ainda mais profundo */
+    background-color: #080808;
     position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -623,22 +578,6 @@ hero-slideshow img:nth-child(1) {
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
-}
-
-/* Coluna de Texto */
-.badge-alert {
-    display: inline-block;
-    padding: 6px 16px;
-    padding-bottom: 5px;
-    background: rgba(255, 60, 60, 0.15);
-    color: #ff4d4d;
-    border: 1px solid rgba(255, 60, 60, 0.3);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
 }
 
 #posicionamento h2 {
@@ -772,21 +711,6 @@ hero-slideshow img:nth-child(1) {
     z-index: 2;
 }
 
-/* Tag de Exclusividade */
-.cta-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--primary);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    margin-bottom: 24px;
-}
-
 /* Título */
 #cta-final h2 {
     font-size: 3.5rem;
@@ -833,65 +757,6 @@ hero-slideshow img:nth-child(1) {
     align-items: flex-start;
 }
 
-/* Botão CTA Grande e Pulsante */
-.btn-cta-pulse-large {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    padding: 20px 48px;
-    border-radius: 999px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(56, 56, 56, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 1;
-}
-
-.btn-cta-pulse-large::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient( 90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100% );
-    transform: skewX(-25deg);
-    animation: shine-loop 3s infinite;
-    z-index: -1;
-}
-
-/* A definição do movimento do brilho */
-@keyframes shine-loop {
-    0% {
-        left: -150%; /* Início: fora na esquerda */
-    }
-    40% {
-        left: 150%; /* Meio: passa rapidamente para a direita */
-    }
-    100% {
-        left: 150%; /* Fim: fica parado na direita (pausa dramática) antes de recomeçar */
-    }
-}
-
-/* Hover: O botão sobe e o brilho fica mais intenso */
-.btn-cta-pulse-large:hover {
-    background: var(--primary);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(220, 220, 220, 0.4);
-}
-
-/* Opcional: Acelerar o brilho no hover */
-.btn-cta-pulse-large:hover::after {
-    animation-duration: 2s;
-}
-
 /* Obs final */
 .cta-obs {
     display: flex;
@@ -905,141 +770,104 @@ hero-slideshow img:nth-child(1) {
     color: #888;
 }
 
-/* --- Footer Profissional --- */
-#main-footer {
-    background-color: #050505;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 80px 0 30px;
-    font-size: 0.95rem;
-}
+@media (max-width: 992px) {
+    .strategy-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .strategy-card {
+        align-items: center;
+        text-align: center;
+        padding: 30px 20px;
+    }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 0.8fr 0.8fr 1.2fr;
-    gap: 40px;
-    margin-bottom: 60px;
-    align-items: start; 
-}
+    #hero h1 {
+        font-size: 2.8rem;
+    }
 
-.footer-col h4 {
-    color: var(--text-main);
-    font-size: 1.1rem;
-    margin-bottom: 24px;
-    letter-spacing: 0.5px;
-    margin-top: 0; 
-    line-height: 1.2;
-}
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+    }
 
-.brand-col .logo { 
-    margin-bottom: 40px;
-    margin-top: 0;
-}
+    .btn-primary, .btn-outline {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
 
-.brand-col .logo-img {
-    height: 35px;
-    margin-bottom: 1rem;
-}
+    .grid-card.featured {
+        grid-column: auto;
+    }
+    
+    /* Ajustes do Método Mobile */
+    .row {
+        flex-direction: column;
+    }
 
-.footer-desc {
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 30px;
-    max-width: 300px;
-}
+    .sticky-img {
+        position: relative;
+        top: 0;
+    }
 
-/* Botões Sociais */
-.social-links {
-    display: flex;
-    gap: 12px;
-}
+    .step-letter {
+        font-size: 2.5rem;
+    }
 
-.social-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-main);
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-}
+    .pos-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
 
-.social-btn:hover {
-    background: var(--primary);
-    color: var(--color-1);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--primary-glow);
-}
+    #posicionamento h2 {
+        font-size: 2.2rem;
+    }
+    
+    .impact-p { 
+        padding-left: 0; 
+        border-left: none; 
+        border-top: 3px solid var(--primary);
+        padding-top: 20px;
+    }
 
-/* Links do Menu */
-.footer-links li {
-    margin-bottom: 12px;
-}
+    .expert-card {
+        padding: 20px;
+    }
 
-.footer-links a {
-    color: var(--text-muted);
-    transition: 0.3s;
-    display: inline-block;
-}
+    #cta-final {
+        padding: 80px 0;
+    }
+    
+    .cta-overlay {
+        background: rgba(5,5,5,0.85);
+    }
 
-.footer-links a:hover {
-    color: var(--primary);
-    transform: translateX(5px);
-}
+    #cta-final h2 { 
+        font-size: 2.4rem; 
+        line-height: 1.2;
+    }
 
-/* Informações de Contato */
-.contact-info li {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-    align-items: flex-start;
-}
+    .cta-desc {
+        font-size: 1.1rem;
+    }
 
-.contact-info i {
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: var(--primary);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 0;
-}
-
-.contact-info span {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-.contact-info a, .contact-info p {
-    color: var(--text-main);
-    font-weight: 500;
-}
-
-.contact-info a:hover {
-    color: var(--primary);
-}
-
-/* Rodapé Inferior (Copyright) */
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-}
-
-.footer-bottom-links a:hover {
-    text-decoration: underline;
+    /* --- Botão CTA ---*/
+    .btn-cta-pulse-large {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 20px;
+    }
+    /* -----------------*/
+    
+    .cta-checklist li {
+        font-size: 0.95rem;
+    }
 }

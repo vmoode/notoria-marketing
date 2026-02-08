@@ -1,0 +1,214 @@
+/* --- Header Glassmorphism --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--header-height);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* 1. A Logo empurra tudo para a direita */
+.logo {
+    align-items: center;
+}
+
+.logo-img {
+    height: 27px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+#main-header .logo {
+    margin-right: auto;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.icon-logo {
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+/* 2. Menu alinhado à direita (perto do botão) */
+#nav-menu {
+    margin-right: 40px;
+}
+
+#nav-menu ul {
+    display: flex;
+    gap: 32px; }
+
+#nav-menu a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+#nav-menu a:hover, #nav-menu a.active {
+    color: var(--text-main);
+}
+
+/* Efeito sublinhado (mantido) */
+#nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--primary);
+    transition: 0.3s ease;
+}
+#nav-menu a:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display:flex;
+    align-items: center;
+}
+
+/* 3. Botão Discreto (Estilo Ghost/Glass) */
+.btn-glow {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+/* Estado Hover: Acende e chama atenção */
+.btn-glow:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 20px var(--primary-glow);
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+   .menu-toggle {
+        display: block;
+        cursor: pointer;
+        z-index: 1100;
+        width: 48px; 
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .menu-toggle span {
+        font-size: 2.2rem;
+        color: var(--text-main);
+        transition: color 0.3s ease;
+    }
+
+    /* Estado Ativo (X Giratório) */
+    .menu-toggle.active {
+        transform: rotate(90deg);
+    }
+
+    .menu-toggle.active span {
+        color: var(--primary);
+    }
+
+    /* --- O Menu Popover (Full Screen) --- */
+    #nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(15px);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: scale(0.95);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transform: scale(1);
+    }
+
+    #nav-menu ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    #nav-menu a {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-main);
+        display: block;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: 0.3s;
+    }
+
+    /* Animação Cascata */
+    #nav-menu.active a {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    #nav-menu.active li:nth-child(1) a { transition-delay: 0.1s; }
+    #nav-menu.active li:nth-child(2) a { transition-delay: 0.2s; }
+    #nav-menu.active li:nth-child(3) a { transition-delay: 0.3s; }
+    #nav-menu.active li:nth-child(4) a { transition-delay: 0.4s; }
+
+    #nav-menu a:hover {
+        color: var(--primary);
+        transform: scale(1.1);
+    }
+
+        /* Esconder botão desktop */
+    .btn-glow {
+        display: none;
+    }
+}
