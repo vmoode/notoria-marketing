@@ -50,14 +50,19 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--header-border);
+    background: rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-main);
-    font-size: 1.2rem;
     transition: all 0.3s ease;
     border: 1px solid transparent;
+}
+
+.social-btn .icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
 }
 
 .social-btn:hover {
@@ -83,7 +88,7 @@
     transform: translateX(5px);
 }
 
-/* Informações de Contato */
+/* --- Informações de Contato --- */
 .contact-info li {
     display: flex;
     gap: 16px;
@@ -91,17 +96,30 @@
     align-items: flex-start;
 }
 
-.contact-info i {
+/* Caixa do ícone de contato */
+.contact-icon-box {
     height: 50px;
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    color: var(--primary);
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 0;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.contact-icon-box > span {
+    display: flex;
+    line-height: 0;
+    align-items: center;
+}
+
+.contact-icon-box .icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-bottom: -4px;
 }
 
 .contact-info span {
@@ -122,6 +140,7 @@
     color: var(--primary);
 }
 
+/* Rodapé Inferior */
 .footer-bottom {
     border-top: 1px solid var(--header-border);
     padding-top: 30px;
@@ -136,6 +155,7 @@
     text-decoration: underline;
 }
 
+/* Responsividade */
 @media (max-width: 992px) {
     .footer-grid {
         grid-template-columns: 1fr;
@@ -163,18 +183,8 @@
         gap: 15px;
         text-align: center;
     }
-    .hero-floating-card {
-        display: none;
-    }
 
-    #hero p {
-        align-items: center;
-    }
-
-    .logo-img {
-        height: 35px;
-    }
-
+    /* Logo específica do footer no mobile */
     .brand-col .logo-img {
         height: 45px;
         margin: 0 auto;
