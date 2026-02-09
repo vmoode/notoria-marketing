@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderAllIcons();
         initMobileMenu();
         injectVmoodeBadge();
+        updateYear();
     });
 });
 
@@ -52,8 +53,15 @@ function updateIconElement(el, iconNameOverride = null) {
 }
 // -------------------------------------------------------------------------------------
 
+// FUNÇÃO: Atualizar Ano do Rodapé ---
+function updateYear() {
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
 
-// --- FUNÇÃO 3: Injetar HTML (Header/Footer) ---
+// FUNÇÃO: Injetar HTML (Header/Footer) ---
 async function includeHTML(elementId, filePath) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -68,7 +76,7 @@ async function includeHTML(elementId, filePath) {
     }
 }
 
-// --- FUNÇÃO 4: Menu Mobile (Adaptada para SVG) ---
+// FUNÇÃO: Menu Mobile ---
 function initMobileMenu() {
     const mobileBtn = document.getElementById('mobile-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -104,7 +112,7 @@ function initMobileMenu() {
     });
 }
 
-// --- FUNÇÃO 5: Badge Vmoode ---
+// FUNÇÃO: Badge Vmoode ---
 function injectVmoodeBadge() {
     const container = document.getElementById('vmoode-container');
     if (!container) return;

@@ -45,7 +45,6 @@ hero-slideshow img:nth-child(1) {
     top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(circle at 50% 50%, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.95) 100%);
     background-size: 150% 150%;
-    animation: spotlight-move 25s infinite alternate ease-in-out;
     z-index: 1;
 }
 
@@ -164,16 +163,11 @@ hero-slideshow img:nth-child(1) {
 }
 
 .stat-item .icon {
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--primary); /* A cor vai para o 'currentColor' do SVG */
+    color: var(--primary);
     padding: 12px;
     border-radius: 12px;
-    
-    /* MUDANÇA AQUI: Trocamos font-size por largura/altura */
     width: 1.5rem; 
     height: 1.5rem;
-    
-    /* IMPORTANTE: Garante que o padding fique "fora" do tamanho do ícone */
     box-sizing: content-box; 
 }
 
@@ -229,7 +223,7 @@ hero-slideshow img:nth-child(1) {
     align-items: center;
     gap: 12px;
     background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    color: var(--color-1);
     padding: 20px 48px;
     border-radius: 999px;
     font-size: 1.1rem;
@@ -670,7 +664,7 @@ hero-slideshow img:nth-child(1) {
 
 .expert-card:hover .expert-icon {
     background: var(--primary);
-    color: white;
+    color: var(--color-1);
 }
 
 .expert-card h4 {
@@ -733,7 +727,7 @@ hero-slideshow img:nth-child(1) {
     font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 24px;
-    color: #fff;
+    color: var(--color-1);
 }
 
 .cta-desc {
