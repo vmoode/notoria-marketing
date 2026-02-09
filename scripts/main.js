@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         initMobileMenu();
         injectVmoodeBadge();
         updateYear();
+        initThemeToggle();
     });
 });
 
@@ -80,24 +81,45 @@ async function includeHTML(elementId, filePath) {
 function initMobileMenu() {
     const mobileBtn = document.getElementById('mobile-btn');
     const navMenu = document.getElementById('nav-menu');
-    const iconContainer = mobileBtn?.querySelector('[data-icon]') || mobileBtn?.querySelector('span');
+    const header = document.getElementById('main-header'); // Selecionamos o header para fixá-lo
+    const iconContainer = mobileBtn ? mobileBtn.querySelector('[data-icon]') : null;
 
     if (!mobileBtn || !navMenu) return;
 
     function toggleMenu() {
         const isActive = navMenu.classList.contains('active');
         
+        // Calcula a largura da barra de rolagem (diferença entre a janela total e a área útil)
+        const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
         if (!isActive) {
+            // --- ABRIR MENU ---
             navMenu.classList.add('active');
             mobileBtn.classList.add('active');
+            
+            // Trava o scroll
             document.body.style.overflow = 'hidden';
+            
+            // COMPENSAÇÃO DO PULO: Adiciona padding igual à largura da barra que sumiu
+            if (scrollBarWidth > 0) {
+                document.body.style.paddingRight = `${scrollBarWidth}px`;
+                // Importante: O header é 'fixed', então ele também precisa desse padding
+                if (header) header.style.paddingRight = `${scrollBarWidth}px`;
+            }
             
             if (iconContainer) updateIconElement(iconContainer, 'close');
             
         } else {
+            // --- FECHAR MENU ---
             navMenu.classList.remove('active');
             mobileBtn.classList.remove('active');
-            document.body.style.overflow = '';
+            
+            // Destrava o scroll e remove a compensação suavemente (timeout opcional ou direto)
+            setTimeout(() => {
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+                if (header) header.style.paddingRight = '';
+            }, 0); // O delay 0 garante que a renderização ocorra na ordem certa
             
             if (iconContainer) updateIconElement(iconContainer, 'menu');
         }
@@ -107,7 +129,9 @@ function initMobileMenu() {
 
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) toggleMenu();
+            if (navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
         });
     });
 }
@@ -133,5 +157,49 @@ function injectVmoodeBadge() {
         script.src = "https://vmoode.com/scripts/badge.js";
         script.async = true;
         document.body.appendChild(script);
+    }
+}
+
+// FUNÇÃO: Alternar Tema Claro/Escuro ---
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+    const iconSpan = toggleBtn ? toggleBtn.querySelector('[data-icon]') : null;
+
+    // 1. Verificar preferência salva ou do sistema
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Define o tema inicial (Padrão é dark se nada estiver salvo)
+    let currentTheme = savedTheme || 'dark';
+    
+    // Aplica o tema inicial
+    applyTheme(currentTheme);
+
+    if (!toggleBtn) return;
+
+    // 2. Evento de Clique
+    toggleBtn.addEventListener('click', () => {
+        // Inverte o tema
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(currentTheme);
+        
+        // Salva no navegador
+        localStorage.setItem('theme', currentTheme);
+    });
+
+    function applyTheme(theme) {
+        htmlEl.setAttribute('data-theme', theme);
+        
+        // Troca o ícone: Se tá claro, mostra o Sol. Se tá escuro, mostra a Lua.
+        // Ou o contrário: "Clique no Sol para ficar claro". 
+        // Padrão comum: Ícone representa o estado ATUAL ou o DESTINO?
+        // Vamos usar: Ícone representa o que vai acontecer (Sol = mudar para claro)
+        // Se o tema ATUAL é dark, mostra SOL. Se é light, mostra LUA.
+        
+        if (iconSpan) {
+            const newIcon = theme === 'dark' ? 'sun' : 'moon';
+            updateIconElement(iconSpan, newIcon);
+        }
     }
 }

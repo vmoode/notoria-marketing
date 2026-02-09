@@ -46,6 +46,11 @@ hero-slideshow img:nth-child(1) {
     background: radial-gradient(circle at 50% 50%, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.95) 100%);
     background-size: 150% 150%;
     z-index: 1;
+    transition: background 0.5s ease;
+}
+
+[data-theme="light"] .gradient-overlay {
+    background: radial-gradient(circle at 50% 50%, rgba(242,242,242,0.4) 0%, rgba(242,242,242,0.9) 100%);
 }
 
 @keyframes ken-burns-loop {
@@ -181,6 +186,49 @@ hero-slideshow img:nth-child(1) {
     font-size: 0.9rem;
     color: var(--text-muted);
 }
+
+/* --- Ajuste do Card Flutuante no Light Mode --- */
+[data-theme="light"] .hero-floating-card {
+    /* Usa branco com 70% de opacidade (igual ao dark que é 0.7) */
+    /* Ou se quiser mais 'vidro', use 0.6 */
+    background: rgba(255, 255, 255, 0.553);
+    
+    /* Borda mais visível para destacar no fundo claro */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    
+    /* Sombra suave para dar profundidade */
+    box-shadow: 0 8px 32px rgba(20, 39, 64, 0.1);
+}
+
+/* Ajuste dos ícones dentro do card no Light Mode */
+[data-theme="light"] .stat-icon {
+    background: rgba(20, 39, 64, 0.05); /* Fundo sutil */
+    color: var(--primary);
+}
+
+[data-theme="light"] .stat-item strong {
+    color: var(--text-main); /* Garante contraste do número */
+}
+
+[data-theme="light"] .btn-outline {
+    /* Garante que a borda e texto sejam visíveis inicialmente */
+    color: var(--text-main);
+    border-color: rgba(20, 39, 64, 0.3);
+}
+
+[data-theme="light"] .btn-outline:hover {
+    /* Fundo Azul Escuro (da variável bg-btn-glow) */
+    background: var(--bg-btn-glow);
+    
+    /* Texto e Ícone ficam Brancos para contraste perfeito */
+    color: #FFFFFF;
+    
+    /* A borda acompanha a cor do fundo */
+    border-color: var(--bg-btn-glow);
+    
+    /* Opcional: Sombra suave para destacar */
+    box-shadow: 0 4px 12px rgba(20, 39, 64, 0.15);
+}
 /* -------------------------------------- */
 
 /* --- Badge padrão --------------------- */
@@ -313,6 +361,32 @@ hero-slideshow img:nth-child(1) {
     border: 1px solid var(--primary-glow);
 }
 
+/* --- Ajuste do Card 'Featured' (Destaque) no Tema Claro --- */
+
+[data-theme="light"] .grid-card.featured {
+    /* Substitui o gradiente escuro por um branco com leve matiz */
+    background: linear-gradient(160deg, #FFFFFF 0%, #F7F7F7 100%);
+    
+    /* Borda na cor primária (mas suave) para destacar */
+    border: 1px solid rgba(140, 76, 52, 0.3);
+    
+    /* Sombra mais pronunciada para dar relevo */
+    box-shadow: 0 10px 30px rgba(140, 76, 52, 0.08);
+}
+
+/* Ajuste dos textos dentro do card destaque no Light Mode */
+[data-theme="light"] .grid-card.featured h3,
+[data-theme="light"] .grid-card.featured p {
+    color: var(--text-main); /* Garante leitura perfeita */
+}
+
+/* Ajuste das Tags dentro do card destaque */
+[data-theme="light"] .grid-card.featured .tags > span {
+    background: rgba(140, 76, 52, 0.1); /* Fundo marrom bem clarinho */
+    color: var(--primary); /* Texto marrom */
+    border-color: rgba(140, 76, 52, 0.2);
+}
+
 .grid-card:hover {
     background: var(--bg-surface-hover);
     transform: translateY(-5px);
@@ -372,6 +446,30 @@ hero-slideshow img:nth-child(1) {
 
 .bg-darker {
     background: #050505;
+}
+
+/* --- Ajuste da Secção Método no Tema Claro --- */
+
+[data-theme="light"] #metodo {
+    /* Troca o fundo escuro (#050505) por branco (#FFFFFF) */
+    background: #FFFFFF;
+    
+    /* Adiciona bordas suaves para separar visualmente */
+    border-top: 1px solid rgba(20, 39, 64, 0.05);
+    border-bottom: 1px solid rgba(20, 39, 64, 0.05);
+}
+
+/* Como a classe .bg-darker pode estar a ser usada em outros lugares,
+   vamos garantir que ela se adapte globalmente ao tema claro se necessário */
+[data-theme="light"] .bg-darker {
+    background: #FFFFFF;
+}
+
+/* Ajuste do Texto "Nosso Segredo" e "Método Validado" */
+[data-theme="light"] .floating-badge {
+    /* O badge flutuante na imagem já é branco, então vamos dar uma borda */
+    border: 1px solid rgba(20, 39, 64, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .row { 
@@ -535,7 +633,6 @@ hero-slideshow img:nth-child(1) {
 .strategy-card:hover {
     transform: translateY(-10px);
     border-color: var(--primary);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .strategy-card:hover .card-glow {
@@ -679,6 +776,41 @@ hero-slideshow img:nth-child(1) {
     line-height: 1.5;
 }
 
+/* --- Ajuste da Secção de Posicionamento no Tema Claro --- */
+
+[data-theme="light"] #posicionamento {
+    /* Troca o fundo preto (#080808) por branco (#FFFFFF) ou cinza muito claro (#F9F9F9) */
+    background-color: var(--bg-surface); 
+    
+    /* Ajusta as bordas superior e inferior para serem sutis */
+    border-top: 1px solid rgba(20, 39, 64, 0.05);
+    border-bottom: 1px solid rgba(20, 39, 64, 0.05);
+}
+
+/* Ajuste dos Cartões de Expertise (Expert Cards) no Light Mode */
+[data-theme="light"] .expert-card {
+    /* Fundo branco puro para contrastar se a seção for cinza, ou vice-versa */
+    background: #FFFFFF;
+    border-color: rgba(20, 39, 64, 0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* Sombra leve */
+}
+
+[data-theme="light"] .expert-card:hover {
+    border-color: var(--primary);
+    background: #FAFAFA;
+}
+
+/* Ajuste dos Ícones dos Cards */
+[data-theme="light"] .expert-icon {
+    background: rgba(20, 39, 64, 0.05);
+    color: var(--primary);
+}
+
+[data-theme="light"] .expert-card:hover .expert-icon {
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
 /* --- CTA Final (Versão Agressiva & Premium) --- */
 #cta-final {
     position: relative;
@@ -785,6 +917,57 @@ hero-slideshow img:nth-child(1) {
     height: 1.1rem;
     fill: #888;
     margin-top: -1px;
+}
+
+/* --- Ajuste da Sessão CTA no Tema Claro --- */
+
+[data-theme="light"] .cta-overlay {
+    /* Gradiente Branco: Sólido na esquerda (para leitura) -> Transparente na direita */
+    background: linear-gradient(90deg, rgba(242, 242, 242, 0.95) 0%, rgba(242, 242, 242, 0.5) 100%);
+}
+
+[data-theme="light"] .cta-bg img.animate-bg {
+    /* Remove o filtro escuro para a imagem brilhar no fundo */
+    filter: brightness(0.95) grayscale(10%); 
+}
+
+/* --- Tipografia com Destaque e Sombra --- */
+
+[data-theme="light"] #cta-final h2 {
+    color: var(--text-main); /* Azul Escuro */
+    
+    /* A Sombra Escura solicitada para "saltar" do fundo */
+    text-shadow: 0 8px 24px rgba(20, 39, 64, 0.25);
+}
+
+[data-theme="light"] .cta-desc {
+    color: var(--text-muted); /* Cinza Escuro Leve */
+    font-weight: 500;
+}
+
+[data-theme="light"] .cta-checklist li {
+    color: var(--text-main); /* Azul Escuro */
+    font-weight: 600;
+}
+
+[data-theme="light"] .cta-obs {
+    color: var(--text-muted);
+}
+
+/* --- Botão CTA no Tema Claro --- */
+/* Como o fundo é claro, o botão transparente original sumiria. 
+   Vamos torná-lo sólido e imponente. */
+[data-theme="light"] .btn-cta-pulse-large {
+    background: var(--primary); /* Marrom Sólido */
+    color: #FFFFFF;
+    border-color: var(--primary);
+    box-shadow: 0 15px 35px rgba(140, 76, 52, 0.25); /* Sombra Colorida */
+}
+
+[data-theme="light"] .btn-cta-pulse-large:hover {
+    background: var(--bg-btn-glow); /* Azul Escuro no Hover */
+    border-color: var(--bg-btn-glow);
+    transform: translateY(-5px);
 }
 
 @media (max-width: 992px) {

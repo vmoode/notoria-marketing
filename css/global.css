@@ -73,6 +73,54 @@
     --radius-lg: 24px;
 }
 
+/* --- TEMA CLARO (LIGHT MODE) --- */
+[data-theme="light"] {
+    /* Cores Base */
+    --bg-body: #F2F2F2;           /* Fundo claro pedido */
+    --bg-surface: #FFFFFF;        /* Cartões brancos para contraste */
+    --bg-surface-hover: #E6E6E6;
+    
+    /* Textos */
+    --text-main: #142740;         /* Azul escuro para textos principais */
+    --text-muted: #4A5568;        /* Cinza azulado para textos secundários */
+    
+    /* Marca & Acentos */
+    --primary: #8C4C34;           /* Marrom da marca */
+    --primary-glow: rgba(140, 76, 52, 0.25); /* Glow mais suave */
+    --color-1: #FFFFFF;           /* Texto dentro de botões primários */
+    
+    /* Header & Componentes */
+    --header-bg: rgba(242, 242, 242, 0.85);
+    --header-border: rgba(20, 39, 64, 0.1);
+    --bg-badge: rgba(20, 39, 64, 0.116);
+    --border-color-1: rgba(20, 39, 64, 0.1);
+    --bg-btn-glow: #142740;       /* Botão fica azul escuro no light mode */
+    --bg-footer: #142740;         /* Footer mantém-se escuro para contraste */
+}
+
+/* Ajuste específico para o botão de tema */
+.theme-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-main);
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-btn:hover {
+    background: var(--bg-badge);
+    color: var(--primary);
+}
+
+/* No mobile, queremos o botão de tema visível também? 
+   Se sim, pode precisar de ajuste no header.css, mas por padrão ele aparecerá na barra. */
+
 * {
     margin: 0;
     padding: 0;

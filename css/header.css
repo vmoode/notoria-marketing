@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     height: 100%;
+    z-index: 99;
 }
 
 .logo {
@@ -42,14 +43,21 @@
 }
 
 #nav-menu {
+    margin-left: auto; /* Empurra o menu para a direita, colando no hambúrguer */
     margin-right: 40px;
+    display: flex;         /* NOVO: Alinha UL e Botão */
+    align-items: center;   /* NOVO: Centraliza verticalmente */
+    gap: 32px;             /* NOVO: Espaço entre a lista e o botão */
 }
 
 #nav-menu ul {
     display: flex;
-    gap: 32px; }
+    gap: 32px;
+    margin: 0; /* Garante que não haja margens extras */
+    padding: 0;
+}
 
-#nav-menu a {
+#nav-menu ul a {
     color: var(--text-muted);
     font-weight: 500;
     font-size: 0.95rem;
@@ -57,11 +65,11 @@
     transition: color 0.3s;
 }
 
-#nav-menu a:hover, #nav-menu a.active {
+#nav-menu ul a:hover, #nav-menu ul a.active {
     color: var(--text-main);
 }
 
-#nav-menu a::after {
+#nav-menu ul a::after {
     content: '';
     position: absolute;
     bottom: -4px;
@@ -71,7 +79,8 @@
     background: var(--primary);
     transition: 0.3s ease;
 }
-#nav-menu a:hover::after {
+
+#nav-menu ul a:hover::after {
     width: 100%;
 }
 
@@ -109,72 +118,118 @@
     cursor: pointer;
 }
 
+/* --- Adaptações para o modo clara --- */
+.logo-img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+[data-theme="light"] .logo-img {
+    filter: brightness(0) saturate(100%) invert(32%) sepia(19%) saturate(2222%) hue-rotate(334deg) brightness(92%) contrast(89%);
+}
+
+[data-theme="light"] .btn-glow {
+    color: #FFFFFF; 
+    border-color: rgba(20, 39, 64, 0.1);
+}
+
+[data-theme="light"] .btn-glow:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #FFFFFF;
+}
+
 @media (max-width: 992px) {
-   .menu-toggle {
-        display: block;
-        cursor: pointer;
-        z-index: 1100;
-        width: 48px; 
-        height: 48px;
+    .menu-toggle {
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        z-index: 1100;
+        
+        width: 48px; 
+        height: 48px;
+        
         background: transparent;
         border: none;
+        padding: 0;
+        
+        /* CORREÇÃO AQUI: Margem negativa para compensar o espaço vazio do botão */
+        margin: 0;
+        margin-right: -8px; 
+        
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
+    /* O 'span' que segura o ícone */
     .menu-toggle span {
-        font-size: 2.2rem;
-        color: var(--text-main);
-        transition: color 0.3s ease;
+        display: flex;           /* O SEGREDO: Transforma o span em caixa flexível */
+        align-items: center;     /* Centraliza verticalmente */
+        justify-content: center; /* Centraliza horizontalmente */
+        width: 100%;             /* Ocupa todo o espaço do botão */
+        height: 100%;
+        line-height: 0;          /* Remove altura de linha de texto */
     }
 
+    /* O Ícone SVG em si */
+    .menu-toggle .icon {
+        width: 32px;   /* Tamanho confortável para mobile */
+        height: 32px;
+        color: var(--text-main);
+        transition: color 0.3s ease;
+        fill: currentColor;
+        display: block; /* Remove comportamento inline */
+    }
+
+    /* Estado Ativo (Gira o ícone) */
     .menu-toggle.active {
         transform: rotate(90deg);
     }
 
-    .menu-toggle.active span {
+    .menu-toggle.active .icon {
         color: var(--primary);
     }
 
+    /* --- Menu Mobile Ajustado --- */
     #nav-menu {
         position: fixed;
-        top: 0;
+        top: var(--header-height); 
         left: 0;
         width: 100%;
-        height: 100vh;
-        background: rgba(10, 10, 10, 0.95);
+        height: calc(100vh - var(--header-height)); 
+        background: rgba(10, 10, 10, 0.98);
         backdrop-filter: blur(15px);
-        z-index: 1050;
+        z-index: 90;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        padding-top: 60px;
+        margin-right: 0;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: scale(0.95);
+        transform: translateY(-10px);
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     #nav-menu.active {
         opacity: 1;
         visibility: visible;
         pointer-events: all;
-        transform: scale(1);
+        transform: translateY(0);
     }
 
     #nav-menu ul {
         flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 30px; /* Reduzi levemente o espaço entre itens */
     }
 
-    #nav-menu a {
+    #nav-menu ul a {
         font-family: var(--font-display);
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.5rem;
+        font-weight: 600;
         color: var(--text-main);
         display: block;
         opacity: 0;
@@ -182,23 +237,79 @@
         transition: 0.3s;
     }
 
-    #nav-menu.active a {
+    /* Animação em cascata dos links */
+    #nav-menu.active ul a {
         opacity: 1;
         transform: translateY(0);
         transition-delay: 0.2s;
     }
 
     #nav-menu.active li:nth-child(1) a { transition-delay: 0.1s; }
-    #nav-menu.active li:nth-child(2) a { transition-delay: 0.2s; }
-    #nav-menu.active li:nth-child(3) a { transition-delay: 0.3s; }
-    #nav-menu.active li:nth-child(4) a { transition-delay: 0.4s; }
+    #nav-menu.active li:nth-child(2) a { transition-delay: 0.15s; }
+    #nav-menu.active li:nth-child(3) a { transition-delay: 0.2s; }
+    #nav-menu.active li:nth-child(4) a { transition-delay: 0.25s; }
+    #nav-menu.active li:nth-child(5) a { transition-delay: 0.3s; }
 
-    #nav-menu a:hover {
+    #nav-menu ul a:hover {
         color: var(--primary);
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 
     .btn-glow {
-        display: none;
+        display: flex !important; 
+        margin-top: 30px;
+        width: auto;
+        min-width: 240px;
+        justify-content: center;
+        padding: 16px 32px;
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    #nav-menu.active .btn-glow {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.35s;
+    }
+
+    #nav-menu.active .btn-glow:hover,
+    #nav-menu.active .btn-glow:active {
+        transition-delay: 0s;
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--color-1);
+        box-shadow: 0 0 20px var(--primary-glow);
+        transform: translateY(-2px);
+    }
+
+    [data-theme="light"] #nav-menu {
+        /* Substitui o preto rgba(10,10,10,0.98) pelo claro #F2F2F2 */
+        background: rgba(242, 242, 242, 0.98);
+        
+        /* Ajusta a linha divisória do topo para ser escura e subtil */
+        border-top: 1px solid rgba(20, 39, 64, 0.05);
+    }
+
+    /* 2. Links do Menu Mobile */
+    [data-theme="light"] #nav-menu ul a {
+        /* Garante que o texto seja o Azul Escuro (#142740) */
+        color: var(--text-main);
+    }
+    
+    /* 3. Ícone do Menu (Hambúrguer/X) */
+    [data-theme="light"] .menu-toggle .icon {
+        color: var(--text-main); /* Fica azul escuro em vez de branco */
+    }
+    
+    [data-theme="light"] .menu-toggle.active .icon {
+        color: var(--primary); /* Ativo fica marrom (#8C4C34) */
+    }
+
+    /* 4. Botão dentro do Menu Mobile */
+    [data-theme="light"] .btn-glow {
+        /* Mantém o texto branco mesmo no mobile */
+        color: #FFFFFF;
+        box-shadow: 0 4px 15px rgba(20, 39, 64, 0.1); /* Sombra suave */
     }
 }

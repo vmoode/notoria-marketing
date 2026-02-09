@@ -155,6 +155,69 @@
     text-decoration: underline;
 }
 
+/* --- TEMA CLARO: Ajustes Específicos para o Rodapé --- */
+/* O rodapé é "Dark" mesmo no tema "Light", por isso forçamos cores claras */
+
+[data-theme="light"] #main-footer {
+    /* Força a cor do texto principal para branco */
+    color: #FFFFFF;
+    
+    /* Borda superior mais visível para separar do corpo claro */
+    border-top: 1px solid rgba(20, 39, 64, 0.1); 
+}
+
+/* Títulos das Colunas */
+[data-theme="light"] .footer-col h4 {
+    color: #FFFFFF; /* Garante branco sobre o azul */
+}
+
+/* Textos Descritivos e Links (Reset da cor muted) */
+[data-theme="light"] .footer-desc,
+[data-theme="light"] .footer-links a,
+[data-theme="light"] .contact-info span,
+[data-theme="light"] .footer-bottom {
+    /* Um cinza muito claro, quase branco, para leitura confortável */
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+/* Hover nos Links */
+[data-theme="light"] .footer-links a:hover {
+    color: var(--primary); /* Mantém o marrom da marca no hover */
+    /* Ou use branco puro se preferir: color: #ffffff; */
+}
+
+/* Informações de Contato (Telefone/Email) */
+[data-theme="light"] .contact-info a,
+[data-theme="light"] .contact-info p {
+    color: #FFFFFF;
+}
+
+/* Ícones Sociais e de Contato */
+[data-theme="light"] .social-btn,
+[data-theme="light"] .contact-icon-box {
+    /* Fundo branco translúcido para contrastar com o azul */
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
+
+[data-theme="light"] .social-btn:hover {
+    background: var(--primary); /* Marrom no hover */
+    color: #FFFFFF;
+}
+
+[data-theme="light"] .brand-col .logo-img {
+    filter: none !important; /* Remove filtros de cor, volta ao original (branco) */
+    opacity: 1;
+}
+
+[data-theme="light"] .contact-info a:hover {
+    /* Recupera a cor da marca quando passa o mouse */
+    color: var(--primary); 
+    
+    /* Opcional: Se quiser um pouco mais de destaque no fundo escuro */
+  
+}
+
 /* Responsividade */
 @media (max-width: 992px) {
     .footer-grid {
