@@ -1,4 +1,3 @@
-/* --- Footer Profissional --- */
 #main-footer {
     background-color: var(--bg-footer);
     border-top: 1px solid var(--header-border);
@@ -40,7 +39,6 @@
     max-width: 300px;
 }
 
-/* Botões Sociais */
 .social-links {
     display: flex;
     gap: 12px;
@@ -72,7 +70,6 @@
     box-shadow: 0 5px 15px var(--primary-glow);
 }
 
-/* Links do Menu */
 .footer-links li {
     margin-bottom: 12px;
 }
@@ -88,7 +85,6 @@
     transform: translateX(5px);
 }
 
-/* --- Informações de Contato --- */
 .contact-info li {
     display: flex;
     gap: 16px;
@@ -96,7 +92,6 @@
     align-items: flex-start;
 }
 
-/* Caixa do ícone de contato */
 .contact-icon-box {
     height: 50px;
     width: 50px;
@@ -156,34 +151,25 @@
 }
 
 /* --- TEMA CLARO: Ajustes Específicos para o Rodapé --- */
-/* O rodapé é "Dark" mesmo no tema "Light", por isso forçamos cores claras */
-
 [data-theme="light"] #main-footer {
-    /* Força a cor do texto principal para branco */
     color: #FFFFFF;
-    
-    /* Borda superior mais visível para separar do corpo claro */
     border-top: 1px solid rgba(20, 39, 64, 0.1); 
 }
 
-/* Títulos das Colunas */
 [data-theme="light"] .footer-col h4 {
-    color: #FFFFFF; /* Garante branco sobre o azul */
+    color: #FFFFFF;
 }
 
-/* Textos Descritivos e Links (Reset da cor muted) */
 [data-theme="light"] .footer-desc,
 [data-theme="light"] .footer-links a,
 [data-theme="light"] .contact-info span,
 [data-theme="light"] .footer-bottom {
-    /* Um cinza muito claro, quase branco, para leitura confortável */
     color: rgba(255, 255, 255, 0.7); 
 }
 
 /* Hover nos Links */
 [data-theme="light"] .footer-links a:hover {
-    color: var(--primary); /* Mantém o marrom da marca no hover */
-    /* Ou use branco puro se preferir: color: #ffffff; */
+    color: var(--primary);
 }
 
 /* Informações de Contato (Telefone/Email) */
@@ -195,30 +181,24 @@
 /* Ícones Sociais e de Contato */
 [data-theme="light"] .social-btn,
 [data-theme="light"] .contact-icon-box {
-    /* Fundo branco translúcido para contrastar com o azul */
     background: rgba(255, 255, 255, 0.1);
     color: #FFFFFF;
 }
 
 [data-theme="light"] .social-btn:hover {
-    background: var(--primary); /* Marrom no hover */
+    background: var(--primary);
     color: #FFFFFF;
 }
 
 [data-theme="light"] .brand-col .logo-img {
-    filter: none !important; /* Remove filtros de cor, volta ao original (branco) */
+    filter: none !important;
     opacity: 1;
 }
 
 [data-theme="light"] .contact-info a:hover {
-    /* Recupera a cor da marca quando passa o mouse */
-    color: var(--primary); 
-    
-    /* Opcional: Se quiser um pouco mais de destaque no fundo escuro */
-  
+    color: var(--primary);
 }
 
-/* Responsividade */
 @media (max-width: 992px) {
     .footer-grid {
         grid-template-columns: 1fr;
@@ -247,7 +227,6 @@
         text-align: center;
     }
 
-    /* Logo específica do footer no mobile */
     .brand-col .logo-img {
         height: 45px;
         margin: 0 auto;
